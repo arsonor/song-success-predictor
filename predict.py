@@ -1,13 +1,13 @@
-import pickle
+from joblib import load
 import pandas as pd
 
 from flask import Flask, request, jsonify
 
 
-model_file = 'hit-model.bin'
+model_file = 'hit-model.joblib'
 
 with open(model_file, 'rb') as f_in:
-    saved_objects = pickle.load(f_in)
+    saved_objects = load(f_in)
 
 preprocessor = saved_objects['preprocessor']
 model = saved_objects['model']

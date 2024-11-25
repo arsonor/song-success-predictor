@@ -61,19 +61,11 @@ docker build -t hit-prediction .
 docker run -it -p 9696:9696 hit-prediction:latest
 ```
 
-```bash
-pipenv shell  
-
-python predict.py
-```
-
-
-
 ## Code
 
 The code for the application is the following:
 
-- [`train.py`](train.py) - Train, Validate and Test the final model and save it in a pickle file.
+- [`train.py`](train.py) - Train, Validate and Test the final model and save it in a joblib file (the file was too heavy with pickle)
 - [`predict.py`](predict.py) - Load the model and serve it via a Flask web service.
 - [`test.py`](test.py) - Test the model with a song example.
 
