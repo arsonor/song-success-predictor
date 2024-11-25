@@ -61,6 +61,14 @@ docker build -t hit-prediction .
 docker run -it -p 9696:9696 hit-prediction:latest
 ```
 
+3. Finally run the test file:
+
+```bash
+pipenv run python test.py
+```
+
+You can also run via the Elastic Beanstalk url, you have the choice in the test.py file
+
 ## Code
 
 The code for the application is the following:
