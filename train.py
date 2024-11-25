@@ -1,4 +1,4 @@
-import pickle
+from joblib import dump
 
 import pandas as pd
 
@@ -14,7 +14,8 @@ from imblearn.over_sampling import SMOTE
 
 smote = SMOTE(random_state=42)
 model = RandomForestClassifier(max_depth=30, max_features='log2', min_samples_leaf=1, min_samples_split=2, n_estimators=476, class_weight='balanced')
-output_file = 'hit-model.bin'
+model.estimators_ = None
+output_file = 'hit-model.joblib'
 
 # data preparation
 
@@ -40,7 +41,7 @@ categorical = ['key', 'artist_type', 'genre']
 preprocessor = ColumnTransformer(
     transformers=[
         ('num', StandardScaler(), numerical),
-        ('cat', OneHotEncoder(drop='first'), categorical)
+        ('cat', OneHotEncoder(sparse_output=True, drop='first'), categorical)
     ]
 )
 
@@ -74,9 +75,6 @@ print(f"Test ROC-AUC: {roc_auc_score(y_test, y_pred):.4f}")
 # Save the preprocessor and model separately
 
 with open(output_file, 'wb') as f_out:
-    pickle.dump({
-        'preprocessor': preprocessor,
-        'model': model
-    }, f_out)
+    dump({'preprocessor': preprocessor, 'model': model}, 'hit-model.joblib', compress=3)
 
 print(f'The model and preprocessor are saved to {output_file}')
