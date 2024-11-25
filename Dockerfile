@@ -11,7 +11,7 @@ COPY ["Pipfile", "Pipfile.lock", "./"]
 RUN pipenv install --deploy --system && \
     rm -rf /root/.cache
 
-COPY ["*.py", "hit-model.bin", "./"]
+COPY ["*.py", "hit-model.joblib", "./"]
 
 EXPOSE 9696
 
