@@ -22,7 +22,7 @@ song = {
 
 url = 'http://localhost:9696/predict'
 
-# host = 'hit-serving-env.eba-haikumet.eu-west-3.elasticbeanstalk.com'
+# host = 'hit-serving-env.eba-pbbfmg3j.eu-west-3.elasticbeanstalk.com'
 # url = f'http://{host}/predict'
 
 response = requests.post(url, json=song).json()
