@@ -1,4 +1,5 @@
 import pickle
+import pandas as pd
 
 from flask import Flask, request, jsonify
 
@@ -17,14 +18,16 @@ app = Flask('hit')
 @app.route('/predict', methods=['POST'])
 def predict():
     song = request.get_json()
+    
+    X = pd.DataFrame([song])
 
-    X = preprocessor.transform([song])
-    y_pred = model.predict_proba(X)[:, 1]
+    X_transformed = preprocessor.transform(X)
+    y_pred = model.predict_proba(X_transformed)[:, 1]
     hit = y_pred > 0.37
     
     result = {
-        'hit_probability': float(y_pred),
-        'hit': bool(hit),
+        'hit_probability': float(y_pred[0]),
+        'hit': bool(hit[0]),
     }
 
     return jsonify(result)

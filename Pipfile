@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 numpy = "*"
 pandas = "*"
-scikit-learn = "*"
+scikit-learn = "==1.4.2"
 imblearn = "*"
 flask = "*"
 gunicorn = "*"
